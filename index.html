@@ -733,295 +733,616 @@ gap:3px;
 </section>
 
 
+
 <section class="section" id="page-lessons">
   <div class="heading">
-    <h1>Darslar</h1>
-    <p>Rus tilini A1 dan C1 gacha bosqichma-bosqich o‘rganing.</p>
+    <h1>Darslar markazi</h1>
+    <p>Rus tilini A1 dan C1 gacha professional o‘rganing.</p>
   </div>
 
   <style>
-    #page-lessons .lesson-levels {
-      display: flex;
+    #page-lessons .course-hero {
+      background: linear-gradient(120deg,#102b55,#075c91);
+      border: 1px solid #247bb0;
+      border-radius: 18px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+    #page-lessons .course-hero h2 {
+      margin: 0 0 8px;
+      font-size: 23px;
+    }
+    #page-lessons .course-hero p {
+      color: #d2eaff;
+      margin: 0;
+    }
+    #page-lessons .course-progress {
+      height: 8px;
+      background: #193858;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 18px;
+    }
+    #page-lessons .course-progress span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: #24d5e9;
+      transition: width .3s;
+    }
+    #page-lessons .level-grid {
+      display: grid;
+      grid-template-columns: repeat(5,minmax(0,1fr));
       gap: 9px;
-      overflow-x: auto;
-      padding: 12px 0;
+      margin: 18px 0;
     }
-    #page-lessons .lesson-level {
-      min-width: 58px;
-      padding: 12px 8px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: var(--panel);
-      color: var(--text);
+    #page-lessons .level-btn {
+      border: 1px solid #294b70;
+      background: #10243d;
+      color: #c8ddf5;
+      border-radius: 12px;
+      padding: 14px 4px;
       cursor: pointer;
+      font-weight: 800;
+      font-size: 17px;
     }
-    #page-lessons .lesson-level.active {
-      background: #087fbd;
+    #page-lessons .level-btn.active {
+      background: linear-gradient(135deg,#0879d5,#13b6d1);
       color: white;
-      border-color: #38bdf8;
+      border-color: #32d7ed;
     }
-    #page-lessons .lesson-card {
-      padding: 16px;
-      margin: 10px 0;
-      border: 1px solid var(--line);
+    #page-lessons .module-card {
+      background: #10243b;
+      border: 1px solid #254564;
       border-radius: 15px;
-      background: var(--panel);
+      padding: 17px;
+      margin: 12px 0;
       cursor: pointer;
+      transition: .2s;
     }
-    #page-lessons .lesson-card h3 {
+    #page-lessons .module-card:hover {
+      border-color: #18bde0;
+      transform: translateY(-2px);
+    }
+    #page-lessons .module-card h3 {
       margin: 0 0 7px;
     }
-    #page-lessons .lesson-card p {
+    #page-lessons .module-card p {
+      color: #a9c0d9;
+      font-size: 13px;
       margin: 0;
-      color: var(--muted);
     }
-    #page-lessons .lesson-detail {
-      display: none;
-      padding: 17px;
-      margin-top: 12px;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: var(--panel);
+    #page-lessons .module-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 13px;
+      font-size: 12px;
+      color: #8db8dc;
     }
-    #page-lessons .lesson-detail.open {
+    #page-lessons .module-bar {
+      height: 5px;
+      background: #263f59;
+      border-radius: 20px;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    #page-lessons .module-bar span {
       display: block;
+      height: 100%;
+      background: #19c5dd;
     }
-    #page-lessons .lesson-example {
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      background: rgba(56,189,248,.09);
+    #page-lessons .lesson-back {
+      background: #173657;
+      color: white;
+      border: 1px solid #3274a7;
+      border-radius: 9px;
+      padding: 10px 15px;
+      cursor: pointer;
+      margin-bottom: 15px;
     }
-    #page-lessons .lesson-quiz button {
-      display: block;
+    #page-lessons .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #10243b;
+      border: 1px solid #254564;
+      padding: 14px;
+      border-radius: 12px;
+      margin: 9px 0;
+      cursor: pointer;
+      color: inherit;
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: var(--panel);
-      color: var(--text);
       text-align: left;
+    }
+    #page-lessons .lesson-item:hover {
+      border-color: #16c4e1;
+    }
+    #page-lessons .lesson-number {
+      min-width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #123f69;
+      color: #62dafa;
+      font-weight: bold;
+    }
+    #page-lessons .lesson-item small {
+      display: block;
+      color: #9cb6d1;
+      margin-top: 5px;
+    }
+    #page-lessons .lesson-content {
+      background: #10243b;
+      border: 1px solid #285071;
+      border-radius: 16px;
+      padding: 19px;
+      margin-top: 15px;
+      line-height: 1.75;
+    }
+    #page-lessons .lesson-content h2,
+    #page-lessons .lesson-content h3 {
+      color: #58d7ed;
+    }
+    #page-lessons .lesson-video {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: 1px dashed #3b7097;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #b4d4ef;
+      padding: 15px;
+      background: #091a2e;
+      margin: 15px 0;
+    }
+    #page-lessons .lesson-video span {
+      font-size: 34px;
+      display: block;
+    }
+    #page-lessons .lesson-action {
+      background: linear-gradient(120deg,#0879d5,#0bafc8);
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+    #page-lessons .lesson-quiz {
+      border-top: 1px solid #31516e;
+      margin-top: 20px;
+      padding-top: 15px;
+    }
+    #page-lessons .lesson-quiz label {
+      display: block;
+      padding: 10px;
+      margin: 7px 0;
+      background: #172f49;
+      border-radius: 9px;
       cursor: pointer;
     }
-    #page-lessons .lesson-result {
-      margin-top: 12px;
-      font-weight: 700;
+    @media(max-width:500px) {
+      #page-lessons .level-grid { gap: 5px; }
+      #page-lessons .level-btn { padding: 12px 2px; font-size: 14px; }
+      #page-lessons .course-hero { padding: 17px; }
     }
   </style>
 
-  <div class="panel">
-    <div class="panel-head">
-      <h2>O‘quv yo‘lingiz</h2>
+  <div class="course-hero">
+    <div style="font-size:12px;color:#8eeaff;margin-bottom:8px">
+      RUSMASTER AI · LANGUAGE ACADEMY
     </div>
-    <div class="lesson-levels" id="rm-levels">
-      <button class="lesson-level active" data-level="A1">A1</button>
-      <button class="lesson-level" data-level="A2">A2</button>
-      <button class="lesson-level" data-level="B1">B1</button>
-      <button class="lesson-level" data-level="B2">B2</button>
-      <button class="lesson-level" data-level="C1">C1</button>
+    <h2 id="rm-course-title">A1 — Boshlang‘ich</h2>
+    <p id="rm-course-description">
+      Rus tilining asoslarini noldan o‘rganishni boshlang.
+    </p>
+    <div class="course-progress">
+      <span id="rm-progress-bar"></span>
     </div>
-    <p id="rm-level-description">Boshlang‘ich daraja</p>
+    <div style="font-size:12px;margin-top:8px;color:#d2eaff">
+      O‘zlashtirilgan darslar:
+      <b id="rm-progress-text">0 / 0</b>
+    </div>
   </div>
 
-  <h2 style="margin-top:22px">Darslar ro‘yxati</h2>
-  <div id="rm-lesson-list"></div>
-  <div class="lesson-detail" id="rm-lesson-detail"></div>
+  <h2>O‘quv darajangiz</h2>
+  <div class="level-grid" id="rm-level-grid">
+    <button class="level-btn active" data-level="A1">A1</button>
+    <button class="level-btn" data-level="A2">A2</button>
+    <button class="level-btn" data-level="B1">B1</button>
+    <button class="level-btn" data-level="B2">B2</button>
+    <button class="level-btn" data-level="C1">C1</button>
+  </div>
+
+  <div id="rm-module-view">
+    <h2>O‘quv modullari</h2>
+    <p style="color:#9cb6d1;font-size:13px">
+      Mavzularni ketma-ket o‘rganing.
+    </p>
+    <div id="rm-module-list"></div>
+  </div>
+
+  <div id="rm-lesson-view" hidden>
+    <button class="lesson-back" id="rm-back-modules">
+      ← Modullarga qaytish
+    </button>
+    <h2 id="rm-module-title"></h2>
+    <div id="rm-lesson-list"></div>
+  </div>
+
+  <div id="rm-content-view" hidden>
+    <button class="lesson-back" id="rm-back-lessons">
+      ← Darslarga qaytish
+    </button>
+    <div class="lesson-content" id="rm-content"></div>
+  </div>
 
   <script>
   (() => {
     const root = document.getElementById('page-lessons');
-    if (!root || root.dataset.initialized === 'yes') return;
-    root.dataset.initialized = 'yes';
+    if (!root || root.dataset.initialized === 'academy') return;
+    root.dataset.initialized = 'academy';
 
-    const lessons = {
-      A1: [
-        {
-          title: 'Rus alifbosi va talaffuz',
-          time: '15 daqiqa',
-          text: 'Rus alifbosida 33 ta harf mavjud. Ulardan 10 tasi unli, 21 tasi undosh va 2 tasi tovush bildirmaydigan belgidir.',
-          example: 'А а — а, Б б — бэ, В в — вэ, Г г — гэ',
-          question: 'Rus alifbosida nechta harf bor?',
-          answers: ['30 ta', '33 ta', '35 ta'],
-          correct: 1
-        },
-        {
-          title: 'Salomlashish va tanishish',
-          time: '20 daqiqa',
-          text: 'Rus tilida salomlashish vaziyatga qarab rasmiy yoki norasmiy shaklda bo‘ladi.',
-          example: 'Привет — Salom. Здравствуйте — Assalomu alaykum. Меня зовут Диёpбек — Mening ismim Diyorbek.',
-          question: 'Qaysi so‘z rasmiy salomlashish hisoblanadi?',
-          answers: ['Привет', 'Пока', 'Здравствуйте'],
-          correct: 2
-        },
-        {
-          title: 'Kishilik olmoshlari',
-          time: '20 daqiqa',
-          text: 'Kishilik olmoshlari shaxsni bildiradi.',
-          example: 'Я — men; Ты — sen; Он — u (erkak); Она — u (ayol); Мы — biz; Вы — siz; Они — ular.',
-          question: '“Biz” rus tilida qanday aytiladi?',
-          answers: ['Мы', 'Вы', 'Они'],
-          correct: 0
-        }
-      ],
-      A2: [
-        {
-          title: 'Otlarning rod kategoriyasi',
-          time: '20 daqiqa',
-          text: 'Rus tilida otlar мужской, женский va средний rodga bo‘linadi.',
-          example: 'стол — мужской; книга — женский; окно — средний.',
-          question: 'Книга qaysi rod?',
-          answers: ['Мужской', 'Женский', 'Средний'],
-          correct: 1
-        },
-        {
-          title: 'Hozirgi zamon fe’llari',
-          time: '25 daqiqa',
-          text: 'Fe’l harakat yoki holatni bildiradi va shaxsga qarab o‘zgaradi.',
-          example: 'Я читаю — Men o‘qiyapman. Ты читаешь — Sen o‘qiyapsan.',
-          question: 'Я ... книгу. To‘g‘ri javobni tanlang.',
-          answers: ['читаешь', 'читаю', 'читают'],
-          correct: 1
-        }
-      ],
-      B1: [
-        {
-          title: 'O‘tgan zamon',
-          time: '25 daqiqa',
-          text: 'O‘tgan zamon fe’llari harakatning oldin sodir bo‘lganini bildiradi.',
-          example: 'Он читал — U o‘qidi. Она читала — U o‘qidi.',
-          question: 'Она ... письмо.',
-          answers: ['читал', 'читала', 'читали'],
-          correct: 1
-        },
-        {
-          title: 'Kelishiklar bilan tanishuv',
-          time: '30 daqiqa',
-          text: 'Rus tilida 6 ta asosiy kelishik mavjud. Ular so‘zlarning gapdagi vazifasini belgilaydi.',
-          example: 'Именительный — кто? что?; Родительный — кого? чего?',
-          question: 'Rus tilida nechta asosiy kelishik bor?',
-          answers: ['4 ta', '5 ta', '6 ta'],
-          correct: 2
-        }
-      ],
-      B2: [
-        {
-          title: 'Sifatdoshlar',
-          time: '30 daqiqa',
-          text: 'Причастие fe’l va sifat xususiyatlarini birlashtiruvchi so‘z shaklidir.',
-          example: 'Читающий студент — o‘qiyotgan talaba.',
-          question: 'Читающий so‘zi qanday ma’no beradi?',
-          answers: ['O‘qigan', 'O‘qiyotgan', 'O‘qiydi'],
-          correct: 1
-        },
-        {
-          title: 'Qo‘shma gaplar',
-          time: '30 daqiqa',
-          text: 'Murakkab gap ikki yoki undan ortiq grammatik asosdan tashkil topadi.',
-          example: 'Я знаю, что ты учишься. — Men sening o‘qishingni bilaman.',
-          question: '“Что” bu gapda qanday vazifada?',
-          answers: ['Bog‘lovchi', 'Ot', 'Fe’l'],
-          correct: 0
-        }
-      ],
-      C1: [
-        {
-          title: 'Nutq uslublari',
-          time: '35 daqiqa',
-          text: 'Rus tilida ilmiy, rasmiy, publitsistik, badiiy va so‘zlashuv uslublari mavjud.',
-          example: 'Научный стиль — ilmiy uslub.',
-          question: 'Qaysi uslub ilmiy maqolalarda ishlatiladi?',
-          answers: ['Разговорный', 'Научный', 'Художественный'],
-          correct: 1
-        },
-        {
-          title: 'Akademik fikr bildirish',
-          time: '40 daqiqa',
-          text: 'Murakkab mavzularda fikrni dalillar, misollar va mantiqiy xulosalar bilan ifodalashni o‘rganing.',
-          example: 'На мой взгляд... — Mening fikrimcha...',
-          question: '“Mening fikrimcha” rus tilida qanday?',
-          answers: ['На мой взгляд', 'До свидания', 'К сожалению'],
-          correct: 0
-        }
-      ]
+    const courses = {
+      A1: {
+        title: 'Boshlang‘ich',
+        description: 'Rus tilining asoslarini noldan o‘rganing.',
+        modules: [
+          ['Alifbo va talaffuz','Harf, tovush, urg‘u va o‘qish qoidalari',[
+            'Rus alifbosi: 33 ta harf',
+            'Unli va undosh tovushlar',
+            'Bo‘g‘in, urg‘u va o‘qish qoidalari',
+            'Tovush almashinuvi va talaffuz',
+            'O‘qish bo‘yicha yakuniy mashqlar'
+          ]],
+          ['Tanishuv va salomlashish','Salomlashish, tanishish va o‘zingiz haqida gapirish',[
+            'Salomlashish va xayrlashish',
+            'O‘zini tanishtirish',
+            'Ism, yosh va millat haqida so‘rash',
+            'Kundalik muloqot iboralari'
+          ]],
+          ['Ot va grammatik jins','Rus tilida otlarning grammatik xususiyatlari',[
+            'Ot so‘z turkumi',
+            'Мужской род',
+            'Женский род',
+            'Средний род',
+            'Grammatik jinsni aniqlash'
+          ]],
+          ['Ko‘plik va olmoshlar','Otlarning ko‘plik shakli va kishilik olmoshlari',[
+            'Otlarning ko‘plik shakli',
+            'Kishilik olmoshlari',
+            'Egalik olmoshlari',
+            'Ko‘rsatish olmoshlari',
+            'Olmoshlar bilan gap tuzish'
+          ]],
+          ['Hozirgi zamon fe’llari','Fe’llarning tuslanishi va gaplarda qo‘llanishi',[
+            'Fe’l haqida tushuncha',
+            'Infinitiv shakli',
+            'Birinchi tuslanish',
+            'Ikkinchi tuslanish',
+            'Hozirgi zamonda gap tuzish',
+            'Fe’llar bo‘yicha mustahkamlash'
+          ]],
+          ['Kelishiklar','Rus tilidagi oltita kelishik tizimiga kirish',[
+            'Kelishiklar haqida umumiy tushuncha',
+            'Именительный падеж',
+            'Винительный падеж',
+            'Родительный падеж',
+            'Дательный падеж',
+            'Творительный падеж',
+            'Предложный падеж',
+            'Kelishiklarda otlarning o‘zgarishi',
+            'Kelishik va predloglar',
+            'Kelishiklar bo‘yicha umumiy mashqlar'
+          ]],
+          ['Sifatlar va sonlar','Predmetlarni tasvirlash va sanash',[
+            'Sifat so‘z turkumi',
+            'Sifatlarning grammatik jinsi',
+            'Sifatlarning ko‘plik shakli',
+            'Miqdor sonlar',
+            'Tartib sonlar'
+          ]],
+          ['O‘tgan va kelasi zamon','Vaqt va harakatni ifodalash',[
+            'O‘tgan zamon',
+            'O‘tgan zamonda jins va son',
+            'Kelasi zamon',
+            'Zamonlarni taqqoslash',
+            'Zamonlar bo‘yicha mashqlar'
+          ]],
+          ['Harakat fe’llariga kirish','Harakat va yo‘nalishni ifodalash',[
+            'Идти va ходить',
+            'Ехать va ездить',
+            'Harakat yo‘nalishlari',
+            'Harakat fe’llarini qo‘llash'
+          ]],
+          ['Savol va inkor gaplar','Savol tuzish va inkor shakllari',[
+            'Savol so‘zlari',
+            'Ha/yo‘q savollari',
+            'Не va нет',
+            'Savol va inkor gaplar'
+          ]],
+          ['Kundalik muloqot','Hayotiy vaziyatlarda rus tilida gaplashish',[
+            'Oila va do‘stlar',
+            'Do‘kon va xarid',
+            'Vaqt va kun tartibi',
+            'Manzil so‘rash va yo‘l ko‘rsatish'
+          ]],
+          ['Yakuniy nazorat','A1 bilimlarini umumlashtirish',[
+            'Grammatik takrorlash',
+            'Lug‘at va o‘qish nazorati',
+            'A1 yakuniy imtihoni'
+          ]]
+        ]
+      },
+      A2: {
+        title:'Elementar',
+        description:'Kundalik muloqot va grammatik bilimlarni kengaytiring.',
+        modules:[
+          ['Kelishiklarni chuqurlashtirish','Kelishiklarning qo‘llanish holatlari',[
+            'Родительный падеж',
+            'Дательный падеж',
+            'Творительный падеж',
+            'Предложный падеж',
+            'Kelishiklarni taqqoslash'
+          ]],
+          ['Fe’l turlari','Совершенный va несовершенный вид',[
+            'Fe’l turi tushunchasi',
+            'Несовершенный вид',
+            'Совершенный вид',
+            'Fe’l juftliklari'
+          ]],
+          ['Qaytish fe’llari','Возвратные глаголы',[
+            'Ся va сь qo‘shimchalari',
+            'Qaytish fe’llarining tuslanishi',
+            'Amaliy qo‘llanish'
+          ]],
+          ['Sifat va ravishlar','Taqqoslash va tavsiflash',[
+            'Sifat darajalari',
+            'Ravishlar',
+            'Taqqoslash konstruksiyalari'
+          ]],
+          ['Murakkab gaplar','Bog‘lovchilar va ergash gaplar',[
+            'Bog‘lovchilar',
+            'Sabab va natija',
+            'Shartli gaplarga kirish'
+          ]]
+        ]
+      },
+      B1: {
+        title:'O‘rta',
+        description:'Mustaqil muloqot va murakkab grammatikani o‘rganing.',
+        modules:[
+          ['Fe’l tizimi','Fe’l turlari va harakat fe’llari',[
+            'Fe’l aspektlari',
+            'Harakat fe’llari',
+            'Prefiksli harakat fe’llari',
+            'Fe’l boshqaruvi'
+          ]],
+          ['Sifatdoshlar','Причастие',[
+            'Haqiqiy sifatdoshlar',
+            'Majhul sifatdoshlar',
+            'Sifatdosh oboroti'
+          ]],
+          ['Ravishdoshlar','Деепричастие',[
+            'Ravishdosh tushunchasi',
+            'Ravishdosh turlari',
+            'Ravishdosh oboroti'
+          ]],
+          ['Murakkab sintaksis','Qo‘shma gaplar',[
+            'Сложносочинённое предложение',
+            'Сложноподчинённое предложение',
+            'Bog‘lovchisiz qo‘shma gaplar'
+          ]]
+        ]
+      },
+      B2: {
+        title:'Yuqori',
+        description:'Murakkab nutq, uslub va grammatikani egallang.',
+        modules:[
+          ['Murakkab grammatika','Grammatik konstruksiyalar',[
+            'Sifatdoshlarning murakkab shakllari',
+            'Ravishdoshlarning qo‘llanishi',
+            'Fe’l boshqaruvi',
+            'Murakkab sintaktik birliklar'
+          ]],
+          ['Nutq uslublari','Функциональные стили',[
+            'Ilmiy uslub',
+            'Rasmiy-idoraviy uslub',
+            'Publitsistik uslub',
+            'So‘zlashuv uslubi'
+          ]],
+          ['Argumentatsiya','Fikrni asoslash',[
+            'Dalil va misollar',
+            'Qarshi fikr bildirish',
+            'Munozara olib borish'
+          ]]
+        ]
+      },
+      C1: {
+        title:'Ilg‘or',
+        description:'Akademik va professional rus tilini egallang.',
+        modules:[
+          ['Akademik rus tili','Ilmiy va professional nutq',[
+            'Akademik lug‘at',
+            'Ilmiy matn tahlili',
+            'Murakkab grammatik konstruksiyalar'
+          ]],
+          ['Uslubiyat va nutq madaniyati','Tilning nozik jihatlari',[
+            'Uslubiy me’yorlar',
+            'Sinonimiya va ma’no nozikliklari',
+            'Frazeologizmlar'
+          ]],
+          ['Professional muloqot','Yuqori darajadagi kommunikatsiya',[
+            'Rasmiy muzokaralar',
+            'Taqdimot va nutq',
+            'Murakkab matnlarni tahlil qilish'
+          ]]
+        ]
+      }
     };
 
-    const descriptions = {
-      A1: 'Boshlang‘ich daraja',
-      A2: 'Elementar daraja',
-      B1: 'O‘rta daraja',
-      B2: 'Yuqori daraja',
-      C1: 'Ilg‘or daraja'
-    };
+    const $ = id => root.querySelector('#' + id);
+    const storageKey = 'rmAcademyCompletedV1';
+    let completed = [];
+    try {
+      completed = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      if (!Array.isArray(completed)) completed = [];
+    } catch(e) { completed = []; }
 
-    const list = root.querySelector('#rm-lesson-list');
-    const detail = root.querySelector('#rm-lesson-detail');
-    const description = root.querySelector('#rm-level-description');
     let currentLevel = 'A1';
+    let currentModule = 0;
 
-    function showLevel(level) {
-      currentLevel = level;
-      description.textContent = descriptions[level];
-      root.querySelectorAll('.lesson-level').forEach(button => {
-        button.classList.toggle('active', button.dataset.level === level);
-      });
-      detail.classList.remove('open');
-      list.innerHTML = '';
+    function getLessons(level) {
+      return courses[level].modules.flatMap((module, mi) =>
+        module[2].map((title, li) => ({
+          id: level + '-' + mi + '-' + li,
+          level, module: mi, number: li + 1, title
+        }))
+      );
+    }
 
-      lessons[level].forEach((lesson, index) => {
+    function updateProgress() {
+      const lessons = getLessons(currentLevel);
+      const count = lessons.filter(x => completed.includes(x.id)).length;
+      const percent = lessons.length ? Math.round(count / lessons.length * 100) : 0;
+      $('rm-progress-bar').style.width = percent + '%';
+      $('rm-progress-text').textContent = count + ' / ' + lessons.length;
+    }
+
+    function showModules() {
+      $('rm-module-view').hidden = false;
+      $('rm-lesson-view').hidden = true;
+      $('rm-content-view').hidden = true;
+      const course = courses[currentLevel];
+      $('rm-course-title').textContent = currentLevel + ' — ' + course.title;
+      $('rm-course-description').textContent = course.description;
+      root.querySelectorAll('.level-btn').forEach(btn =>
+        btn.classList.toggle('active', btn.dataset.level === currentLevel)
+      );
+
+      $('rm-module-list').innerHTML = '';
+      course.modules.forEach((module, i) => {
+        const lessons = module[2].map((title, j) => ({
+          id: currentLevel + '-' + i + '-' + j
+        }));
+        const done = lessons.filter(x => completed.includes(x.id)).length;
+        const percent = Math.round(done / lessons.length * 100);
         const card = document.createElement('div');
-        card.className = 'lesson-card';
-        const heading = document.createElement('h3');
-        heading.textContent = `${index + 1}. ${lesson.title}`;
-        const info = document.createElement('p');
-        info.textContent = `📘 ${lesson.time} · Darsni boshlash uchun bosing`;
-        card.append(heading, info);
-        card.addEventListener('click', () => openLesson(lesson));
-        list.appendChild(card);
+        card.className = 'module-card';
+        card.innerHTML = `
+          <h3>${i+1}. ${module[0]}</h3>
+          <p>${module[1]}</p>
+          <div class="module-meta">
+            <span>${module[2].length} ta dars</span>
+            <span>${done}/${module[2].length} bajarilgan</span>
+          </div>
+          <div class="module-bar"><span style="width:${percent}%"></span></div>
+        `;
+        card.addEventListener('click', () => showLessons(i));
+        $('rm-module-list').appendChild(card);
+      });
+      updateProgress();
+    }
+
+    function showLessons(moduleIndex) {
+      currentModule = moduleIndex;
+      const module = courses[currentLevel].modules[moduleIndex];
+      $('rm-module-view').hidden = true;
+      $('rm-lesson-view').hidden = false;
+      $('rm-content-view').hidden = true;
+      $('rm-module-title').textContent = module[0];
+      $('rm-lesson-list').innerHTML = '';
+
+      module[2].forEach((title, i) => {
+        const id = currentLevel + '-' + moduleIndex + '-' + i;
+        const btn = document.createElement('button');
+        btn.className = 'lesson-item';
+        btn.innerHTML = `
+          <span class="lesson-number">${completed.includes(id) ? '✓' : i+1}</span>
+          <span><b>${title}</b><small>${completed.includes(id) ? 'Tugallangan' : 'Darsni boshlash'} · 20–30 daqiqa</small></span>
+        `;
+        btn.addEventListener('click', () => showContent(id, title));
+        $('rm-lesson-list').appendChild(btn);
       });
     }
 
-    function openLesson(lesson) {
-      detail.classList.add('open');
-      detail.innerHTML = `
-        <h2>${lesson.title}</h2>
-        <p>${lesson.text}</p>
-        <div class="lesson-example">${lesson.example}</div>
-        <h3>Bilimingizni tekshiring</h3>
-        <p>${lesson.question}</p>
-        <div class="lesson-quiz"></div>
-        <div class="lesson-result"></div>
+    function showContent(id, title) {
+      $('rm-module-view').hidden = true;
+      $('rm-lesson-view').hidden = true;
+      $('rm-content-view').hidden = false;
+
+      const videoTitle = encodeURIComponent('Russian language ' + title);
+      $('rm-content').innerHTML = `
+        <div style="color:#65d9f0;font-size:12px;font-weight:bold">
+          ${currentLevel} · ${courses[currentLevel].modules[currentModule][0]}
+        </div>
+        <h2>${title}</h2>
+        <div class="lesson-video">
+          <div><span>▶</span><b>Videodars</b><p>Bu mavzu uchun video material tayyorlanmoqda.</p></div>
+        </div>
+        <h3>1. Dars maqsadi</h3>
+        <p>Ushbu darsda «${title}» mavzusining asosiy qoidalari, qo‘llanish holatlari va rus tilidagi misollar bilan tanishasiz.</p>
+        <h3>2. Nazariy qism</h3>
+        <p>Yangi mavzuni o‘rganishda rus tilidagi grammatik qoidalarga, so‘zlarning shakliga va gapdagi vazifasiga e'tibor bering. Har bir qoidani misollar orqali mustahkamlang.</p>
+        <h3>3. Misollar</h3>
+        <p><b>Здравствуйте!</b> — Assalomu alaykum!</p>
+        <p><b>Меня зовут Анна.</b> — Mening ismim Anna.</p>
+        <p><b>Я изучаю русский язык.</b> — Men rus tilini o‘rganyapman.</p>
+        <h3>4. Mustahkamlash</h3>
+        <p>Yangi qoidalarni ovoz chiqarib takrorlang, misollarni yozing va ularni o‘zbek tiliga tarjima qiling.</p>
+        <div class="lesson-quiz">
+          <h3>5. Nazorat savoli</h3>
+          <p>«Здравствуйте» so‘zining tarjimasi qaysi?</p>
+          <label><input type="radio" name="rmquiz" value="0"> Xayr</label>
+          <label><input type="radio" name="rmquiz" value="1"> Assalomu alaykum</label>
+          <label><input type="radio" name="rmquiz" value="2"> Rahmat</label>
+          <button class="lesson-action" id="rm-check-answer">Javobni tekshirish</button>
+          <p id="rm-quiz-result"></p>
+        </div>
+        <button class="lesson-action" id="rm-complete-lesson">
+          ${completed.includes(id) ? '✓ Dars tugallangan' : 'Darsni tugatish'}
+        </button>
       `;
-      const quiz = detail.querySelector('.lesson-quiz');
-      const result = detail.querySelector('.lesson-result');
 
-      lesson.answers.forEach((answer, index) => {
-        const button = document.createElement('button');
-        button.textContent = answer;
-        button.addEventListener('click', () => {
-          quiz.querySelectorAll('button').forEach(b => b.disabled = true);
-          if (index === lesson.correct) {
-            result.textContent = '✓ To‘g‘ri javob! Barakalla!';
-            result.style.color = '#22c55e';
-            let points = Number(localStorage.getItem('rmPoints') || 0) + 10;
-            localStorage.setItem('rmPoints', points);
-          } else {
-            result.textContent = '✗ Noto‘g‘ri. To‘g‘ri javob: ' + lesson.answers[lesson.correct];
-            result.style.color = '#f87171';
-          }
-        });
-        quiz.appendChild(button);
+      $('rm-check-answer').addEventListener('click', () => {
+        const answer = root.querySelector('input[name="rmquiz"]:checked');
+        $('rm-quiz-result').textContent = !answer
+          ? 'Avval javobni tanlang.'
+          : answer.value === '1'
+            ? 'To‘g‘ri javob! Barakalla.'
+            : 'Javob noto‘g‘ri. Yana urinib ko‘ring.';
+      });
+
+      $('rm-complete-lesson').addEventListener('click', () => {
+        if (!completed.includes(id)) {
+          completed.push(id);
+          localStorage.setItem(storageKey, JSON.stringify(completed));
+        }
+        updateProgress();
+        showLessons(currentModule);
       });
     }
 
-    root.querySelectorAll('.lesson-level').forEach(button => {
-      button.addEventListener('click', () => showLevel(button.dataset.level));
+    root.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentLevel = btn.dataset.level;
+        showModules();
+      });
     });
 
-    showLevel(currentLevel);
+    $('rm-back-modules').addEventListener('click', showModules);
+    $('rm-back-lessons').addEventListener('click', () => showLessons(currentModule));
+
+    showModules();
   })();
   </script>
 </section>
+
 
 
 <section class="section" id="page-vocab">
