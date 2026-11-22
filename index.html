@@ -1,420 +1,609 @@
-
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07152e">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#061329">
 <title>RusMaster AI</title>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
 
 :root {
-  --bg:#07152e;
-  --panel:#102342;
-  --panel2:#162c50;
-  --blue:#218bff;
-  --cyan:#55c5ff;
-  --white:#f5f8ff;
-  --muted:#91a8c8;
-  --gold:#ffc64c;
+--bg:#030e22;
+--panel:#071b3b;
+--line:#164d91;
+--blue:#075cf2;
+--cyan:#20d8f4;
+--muted:#a9c3e8;
+--white:#f7faff;
+--gold:#ffc93d;
 }
-* {box-sizing:border-box;margin:0;padding:0}
+
+* { box-sizing:border-box; }
+
 body {
-  background:var(--bg);
-  color:var(--white);
-  font-family:Inter,Arial,sans-serif;
-  min-height:100vh;
+margin:0;
+background:radial-gradient(ellipse at 60% -20%,#063e9c 0,transparent 42%),
+linear-gradient(120deg,#020b1d,#041735 65%,#020b1d);
+color:var(--white);
+font-family:'DM Sans',sans-serif;
+min-height:100vh;
 }
-button {font:inherit;cursor:pointer}
+
+button { font:inherit; cursor:pointer; }
+
 .app {
-  max-width:1100px;
-  margin:auto;
-  padding:24px 20px 100px;
+min-height:100vh;
+display:grid;
+grid-template-columns:252px minmax(0,1fr);
 }
-.header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:28px;
+
+.sidebar {
+height:100vh;
+position:sticky;
+top:0;
+padding:20px 19px 18px;
+background:linear-gradient(180deg,#04152f,#031027);
+border-right:1px solid #1254a0;
+display:flex;
+flex-direction:column;
+z-index:5;
 }
-.brand {display:flex;align-items:center;gap:12px}
-.logo {
-  width:46px;height:46px;border-radius:15px;
-  background:linear-gradient(135deg,#168fff,#55d3ff);
-  display:grid;place-items:center;font-size:24px;
-  box-shadow:0 5px 25px #168fff55;
+
+.brand { text-align:center; padding:2px 0 32px; }
+.logo { font-size:54px; line-height:1.1; color:#20caff; }
+.brand h2 {
+font:800 25px Manrope;
+margin:5px 0 2px;
+letter-spacing:-1px;
 }
-.brand h2 {font-size:19px;letter-spacing:-.5px}
-.brand p {font-size:11px;color:var(--muted);margin-top:4px}
-.avatar {
-  width:44px;height:44px;border-radius:50%;
-  background:linear-gradient(135deg,#258cff,#806cff);
-  display:grid;place-items:center;font-weight:800;
-  border:2px solid #70bdff;
-}
-.welcome {margin-bottom:23px}
-.welcome small {color:var(--muted);font-size:13px}
-.welcome h1 {font-size:27px;margin-top:7px;letter-spacing:-1px}
-.hero {
-  background:linear-gradient(115deg,#153e79,#102b56 65%,#154c84);
-  border:1px solid #2a6098;
-  border-radius:23px;padding:23px;
-  position:relative;overflow:hidden;margin-bottom:18px;
-}
-.hero:after {
-  content:"✦";position:absolute;right:25px;top:12px;
-  font-size:100px;color:#8bd2ff18;
-}
-.hero-top {display:flex;justify-content:space-between;gap:15px}
-.hero h3 {font-size:17px}
-.level {
-  background:#1baf7b;color:white;padding:6px 12px;
-  border-radius:20px;font-size:12px;font-weight:700;
-}
-.progress-number {font-size:43px;font-weight:800;margin-top:18px}
-.progress-number span {font-size:15px;color:#a8c9ed}
-.progress {
-  height:8px;background:#304c70;border-radius:20px;
-  margin:12px 0 8px;overflow:hidden;
-}
-.progress div {
-  width:35%;height:100%;border-radius:20px;
-  background:linear-gradient(90deg,#32b9ff,#63e0f5);
-}
-.muted {color:var(--muted);font-size:12px}
-.stats {
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:13px;margin-bottom:27px;
-}
-.stat {
-  background:var(--panel);border:1px solid #203d64;
-  padding:17px;border-radius:17px;
-}
-.stat-icon {font-size:22px}
-.stat strong {font-size:25px;display:block;margin:8px 0 4px}
-.section-head {
-  display:flex;justify-content:space-between;
-  align-items:center;margin:25px 0 14px;
-}
-.section-head h3 {font-size:17px}
-.section-head span {font-size:12px;color:var(--cyan)}
-.tasks {
-  background:var(--panel);border:1px solid #203d64;
-  border-radius:18px;padding:8px 16px;
-}
-.task {
-  display:flex;align-items:center;gap:12px;
-  padding:14px 0;border-bottom:1px solid #263b59;
-}
-.task:last-child {border:0}
-.check {
-  width:25px;height:25px;border-radius:50%;
-  border:2px solid #6684aa;display:grid;place-items:center;
-  color:white;flex-shrink:0;background:transparent;
-}
-.check.done {background:#13b981;border-color:#13b981}
-.task-info {flex:1}
-.task-info strong {font-size:13px;display:block}
-.task-info small {color:var(--muted);font-size:11px;display:block;margin-top:5px}
-.ai-card {
-  background:linear-gradient(120deg,#174d91,#17336b);
-  border:1px solid #3275bd;border-radius:20px;
-  padding:20px;margin-top:25px;
-}
-.ai-label {color:#8bd4ff;font-size:11px;font-weight:800;letter-spacing:1.5px}
-.ai-card h2 {font-size:22px;margin:12px 0 7px}
-.ai-card p {color:#c2d6f0;font-size:13px;line-height:1.6}
-.primary {
-  background:linear-gradient(90deg,#1688ff,#29b3f6);
-  color:white;border:0;border-radius:13px;
-  padding:13px 20px;font-weight:700;
-  margin-top:17px;width:100%;
-  box-shadow:0 5px 20px #168bff30;
-}
-.primary:active {transform:scale(.98)}
-.page {display:none}
-.page.active {display:block}
-.cards {
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:13px;margin-top:20px;
-}
-.card {
-  background:var(--panel);border:1px solid #203d64;
-  border-radius:18px;padding:18px;min-height:135px;
-}
-.card .emoji {font-size:27px}
-.card h3 {font-size:14px;margin:13px 0 6px}
-.card p {font-size:11px;color:var(--muted);line-height:1.5}
-.lesson {
-  background:var(--panel);border:1px solid #203d64;
-  padding:16px;border-radius:16px;margin-top:12px;
-  display:flex;align-items:center;gap:13px;
-}
-.lesson-icon {
-  width:47px;height:47px;border-radius:13px;
-  background:#1c4d88;display:grid;place-items:center;
-  font-size:23px;flex-shrink:0;
-}
-.lesson h3 {font-size:13px;margin-bottom:5px}
-.lesson p {font-size:11px;color:var(--muted)}
-.word {
-  background:var(--panel);border:1px solid #203d64;
-  border-radius:15px;padding:16px;margin-top:11px;
-}
-.word h3 {font-size:17px}
-.word p {font-size:12px;color:var(--muted);margin-top:7px}
-.search {
-  width:100%;padding:14px;border-radius:13px;
-  border:1px solid #294466;background:var(--panel);
-  color:white;margin:17px 0;outline:none;
-}
-.chat {
-  background:var(--panel);padding:17px;
-  border-radius:17px;margin-top:25px;
-  line-height:1.7;font-size:14px;
-}
-.chat small {color:var(--cyan);display:block;margin-bottom:6px}
-.mic {
-  width:95px;height:95px;border-radius:50%;
-  border:0;background:linear-gradient(135deg,#148cff,#4dd4ff);
-  color:white;font-size:35px;display:grid;place-items:center;
-  margin:30px auto;box-shadow:0 0 35px #168bff55;
-}
-.profile {
-  text-align:center;padding:30px 0;
-}
-.profile-avatar {
-  width:90px;height:90px;border-radius:50%;
-  margin:0 auto 15px;background:linear-gradient(135deg,#218bff,#8b71ff);
-  display:grid;place-items:center;font-size:35px;
-}
-.nav {
-  position:fixed;bottom:0;left:0;right:0;
-  background:#0b1b35f5;backdrop-filter:blur(15px);
-  border-top:1px solid #263c5b;
-  display:flex;justify-content:center;
-  padding:10px 5px max(12px,env(safe-area-inset-bottom));
-  z-index:10;
-}
-.nav-inner {
-  width:100%;max-width:650px;
-  display:flex;justify-content:space-around;
-}
+.brand h2 span { color:#27d5f4; }
+.brand small { color:#a9c4e9; }
+
+.nav { display:grid; gap:7px; }
+
 .nav button {
-  background:none;border:0;color:#839ab9;
-  display:flex;flex-direction:column;align-items:center;
-  gap:5px;font-size:10px;min-width:54px;
+height:51px;
+border:1px solid transparent;
+background:transparent;
+color:#b4c9e9;
+border-radius:15px;
+text-align:left;
+padding:0 16px;
+display:flex;
+align-items:center;
+gap:15px;
+font-weight:600;
 }
-.nav button b {font-size:20px;font-weight:400}
-.nav button.active {color:#49b9ff}
-@media(min-width:700px) {
-  .app {padding-top:35px}
-  .stats {grid-template-columns:repeat(4,1fr)}
-  .cards {grid-template-columns:repeat(3,1fr)}
-  .hero {padding:30px}
+
+.nav button .ic { font-size:21px; width:25px; text-align:center; }
+
+.nav button.active {
+background:linear-gradient(100deg,#168cff,#063bd5);
+border-color:#42baff;
+box-shadow:0 0 20px #087cff80;
+color:white;
+}
+
+.nav button:hover:not(.active) { background:#0b2850; }
+
+.premium {
+margin-top:auto;
+padding:17px;
+border:1px solid #d49a22;
+border-radius:19px;
+background:linear-gradient(145deg,#403014,#14213a);
+}
+
+.premium b { color:#ffd24d; font-size:17px; }
+.premium p { font-size:12px; line-height:1.45; color:#e1e5ed; margin:9px 0 12px; }
+.premium button {
+width:100%;
+border:0;
+border-radius:30px;
+background:linear-gradient(90deg,#ffe37a,#ffb91e);
+padding:11px;
+font-weight:800;
+color:#241900;
+}
+
+.version { text-align:center; color:#7896c3; font-size:12px; margin-top:19px; }
+
+.main {
+min-width:0;
+padding:16px 24px 25px;
+max-width:1700px;
+width:100%;
+margin:auto;
+}
+
+.top {
+height:55px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:13px;
+}
+
+.date {
+border:1px solid #16447f;
+border-radius:28px;
+padding:10px 18px;
+background:#071c3b;
+color:#e1edff;
+font-weight:700;
+font-size:13px;
+}
+
+.date small { display:block; color:#89a9d4; font-weight:500; margin-left:27px; }
+
+.right { display:flex; align-items:center; gap:17px; }
+
+.bell {
+height:43px;
+width:43px;
+border:1px solid #23559a;
+border-radius:50%;
+background:#0b2144;
+color:white;
+font-size:19px;
+position:relative;
+}
+
+.bell:after {
+content:"";
+position:absolute;
+right:8px;
+top:7px;
+width:8px;
+height:8px;
+border-radius:50%;
+background:#ff4565;
+}
+
+.user { display:flex; align-items:center; gap:11px; font-weight:700; }
+
+.avatar {
+height:43px;
+width:43px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#12c7ff,#1452ec);
+font-size:18px;
+border:2px solid #258cff;
+}
+
+.hero-row {
+display:grid;
+grid-template-columns:minmax(0,1fr) 310px;
+gap:18px;
+}
+
+.hero {
+height:295px;
+position:relative;
+overflow:hidden;
+border-radius:26px;
+border:1px solid #168dff;
+background:
+radial-gradient(circle at 85% 30%,#29baff55,transparent 28%),
+linear-gradient(110deg,#073d92,#0753b5 55%,#063477);
+box-shadow:0 16px 40px #0005;
+}
+
+.hero:after {
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,transparent 50%,#39c9ff20);
+pointer-events:none;
+}
+
+.hero-copy { position:relative; z-index:1; padding:40px 30px; max-width:650px; }
+
+.eyebrow {
+font-size:12px;
+letter-spacing:1.8px;
+text-transform:uppercase;
+color:#b2e2ff;
+font-weight:800;
+}
+
+.hero h1 {
+font:800 clamp(29px,3vw,48px) Manrope;
+margin:12px 0 4px;
+letter-spacing:-1.5px;
+}
+
+.hero-sub {
+font-size:20px;
+line-height:1.3;
+font-weight:700;
+font-style:italic;
+color:#c7e6ff;
+margin:0 0 24px;
+}
+
+.goal {
+display:flex;
+align-items:center;
+gap:15px;
+width:max-content;
+max-width:100%;
+padding:12px 17px;
+border:1px solid #44d2ff;
+border-radius:19px;
+background:#031c43d9;
+}
+
+.target { font-size:33px; }
+.goal small { display:block; color:#8ddfff; font-weight:700; font-size:12px; }
+.goal b { font-size:18px; display:block; margin-top:2px; }
+
+.progress {
+border:1px solid #244f93;
+border-radius:25px;
+background:linear-gradient(145deg,#081d3e,#04132c);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+box-shadow:0 15px 35px #0004;
+}
+
+.progress-title { font-size:17px; font-weight:800; }
+
+.ring {
+width:148px;
+height:148px;
+border-radius:50%;
+display:grid;
+place-items:center;
+margin:12px 0;
+background:conic-gradient(var(--cyan) 0 35%,#1a396b 35% 100%);
+position:relative;
+}
+
+.ring:before {
+content:"";
+position:absolute;
+inset:12px;
+background:#071a38;
+border-radius:50%;
+}
+
+.ring b { position:relative; font:800 38px Manrope; }
+.progress small { color:#b9cdeb; font-size:13px; }
+
+.stats {
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin:17px 0 18px;
+}
+
+.stat {
+height:108px;
+border-radius:22px;
+border:1px solid #087bff;
+background:linear-gradient(135deg,#073d83,#061b3d);
+display:flex;
+align-items:center;
+gap:15px;
+padding:16px 22px;
+position:relative;
+overflow:hidden;
+}
+
+.stat:nth-child(2) { border-color:#783cff; background:linear-gradient(135deg,#302078,#111a46); }
+.stat:nth-child(3) { border-color:#c38b19; background:linear-gradient(135deg,#5b4011,#18223d); }
+.stat:nth-child(4) { border-color:#05b98e; background:linear-gradient(135deg,#075c55,#09243d); }
+
+.stat-ico { font-size:35px; }
+.stat strong { font:800 29px Manrope; display:block; }
+.stat small { color:#d0def4; font-size:13px; }
+.growth { margin-left:auto; color:#00e8a4; font-size:13px; font-weight:800; }
+
+.lower {
+display:grid;
+grid-template-columns:minmax(0,1.65fr) minmax(330px,.85fr);
+gap:18px;
+}
+
+.panel {
+border:1px solid #1255a0;
+border-radius:23px;
+background:linear-gradient(145deg,#071f45,#04152e);
+padding:20px 22px;
+box-shadow:0 15px 38px #0004;
+}
+
+.panel-head {
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:19px;
+}
+
+.panel-head h2 { font:800 21px Manrope; margin:0; }
+
+.link {
+border:1px solid #087cff;
+border-radius:24px;
+padding:9px 15px;
+background:#073d92;
+color:white;
+font-weight:700;
+}
+
+.levels {
+display:flex;
+justify-content:space-between;
+position:relative;
+padding:4px 12px 0;
+}
+
+.levels:before {
+content:"";
+position:absolute;
+left:8%;
+right:8%;
+height:3px;
+top:33px;
+background:linear-gradient(90deg,#00d7ff,#087cff,#284b84);
+}
+
+.level { width:18%; text-align:center; z-index:1; }
+
+.circle {
+width:66px;
+height:66px;
+margin:auto;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#071a38;
+border:4px solid #31558f;
+font:800 22px Manrope;
+color:#d5e5ff;
+}
+
+.level.active .circle {
+border-color:#28dfff;
+box-shadow:0 0 0 5px #00cfff25,0 0 25px #00cfff;
+color:white;
+}
+
+.level span { display:block; font-size:12px; color:#b4c9e9; margin-top:8px; }
+
+.current {
+margin-top:19px;
+padding:11px 14px;
+border-radius:17px;
+border:1px solid #087cff;
+background:#041b3a;
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.current .book { font-size:26px; }
+.current-info { flex:1; }
+.current-info small { color:#29d9ff; font-weight:700; }
+.current-info b { display:block; font-size:13px; margin-top:3px; }
+
+.start {
+border:0;
+border-radius:28px;
+padding:13px 22px;
+background:linear-gradient(90deg,#09c8ee,#0758fa);
+color:white;
+font-weight:800;
+}
+
+.quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+.quick {
+min-height:94px;
+border-radius:18px;
+border:1px solid #2859aa;
+background:linear-gradient(145deg,#172d85,#0b214a);
+padding:13px;
+text-align:left;
+color:white;
+}
+
+.quick:nth-child(2) { background:linear-gradient(145deg,#075b62,#102849); border-color:#0a9c9d; }
+.quick:nth-child(3) { background:linear-gradient(145deg,#064a86,#0a2144); }
+.quick:nth-child(4) { background:linear-gradient(145deg,#4c3a13,#182542); border-color:#a47b23; }
+
+.quick .qicon { font-size:25px; display:block; }
+.quick b { display:block; margin-top:5px; font-size:14px; }
+.quick small { display:block; color:#c0d2eb; font-size:11px; margin-top:3px; }
+
+.footer {
+margin-top:17px;
+border:1px solid #078cff;
+border-radius:23px;
+min-height:70px;
+padding:12px 24px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:linear-gradient(90deg,#082c65,#061a3a);
+}
+
+.quote { font:italic 600 18px Georgia; }
+.signature { font:italic 700 24px Georgia; color:#63d8ff; }
+
+.section { display:none; }
+.section.active { display:block; }
+
+.heading { margin:14px 0 18px; }
+.heading h1 { font:800 31px Manrope; margin:0 0 5px; }
+.heading p { margin:0; color:var(--muted); }
+
+.list { display:grid; gap:11px; }
+
+.rowitem {
+display:flex;
+align-items:center;
+gap:14px;
+padding:16px;
+border:1px solid var(--line);
+border-radius:16px;
+background:#081e40;
+}
+
+.rowitem .symbol { font-size:25px; }
+.rowitem div:nth-child(2) { flex:1; }
+.rowitem small { display:block; color:var(--muted); margin-top:4px; }
+.rowitem button {
+background:#0d3c73;
+color:#66dcff;
+border:1px solid #1a65a7;
+border-radius:10px;
+padding:9px;
+}
+
+.search {
+width:100%;
+padding:14px;
+border:1px solid var(--line);
+border-radius:13px;
+background:#071a36;
+color:white;
+margin-bottom:13px;
+}
+
+.gamegrid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+
+.game {
+padding:22px;
+border:1px solid var(--line);
+border-radius:18px;
+background:#0a2144;
+}
+
+.game .symbol { font-size:32px; }
+.game h3 { margin:12px 0 6px; }
+.game p { color:var(--muted); font-size:13px; line-height:1.5; }
+.game button {
+background:#075ce4;
+color:white;
+border:0;
+padding:10px 14px;
+border-radius:10px;
+}
+
+.mobile { display:none; }
+
+.toast {
+position:fixed;
+right:22px;
+bottom:22px;
+padding:13px 18px;
+border-radius:13px;
+background:#103766;
+border:1px solid #32caff;
+opacity:0;
+transition:.2s;
+z-index:30;
+}
+
+.toast.show { opacity:1; }
+
+@media(max-width:1120px) {
+.app { grid-template-columns:215px 1fr; }
+.main { padding:14px; }
+.hero-row { grid-template-columns:minmax(0,1fr) 250px; }
+.stats { gap:9px; }
+.stat { padding:12px; }
+.lower { grid-template-columns:1fr; }
+.quick-grid { grid-template-columns:repeat(4,1fr); }
+}
+
+@media(max-width:760px) {
+.app { display:block; }
+.sidebar { display:none; }
+.main { padding:12px 12px 90px; }
+.top { height:45px; }
+.date { font-size:11px; padding:7px 11px; }
+.user { font-size:0; }
+.avatar { font-size:17px; }
+.hero-row { grid-template-columns:1fr; }
+.hero { height:255px; }
+.hero-copy { padding:27px 20px; }
+.hero h1 { font-size:30px; }
+.hero-sub { font-size:16px; }
+.goal { padding:10px 12px; }
+.goal b { font-size:15px; }
+.progress {
+min-height:130px;
+display:grid;
+grid-template-columns:1fr auto;
+padding:12px 18px;
+}
+.ring {
+grid-column:2;
+grid-row:1/3;
+width:85px;
+height:85px;
+margin:0;
+}
+.ring:before { inset:7px; }
+.ring b { font-size:21px; }
+.stats { grid-template-columns:1fr 1fr; gap:8px; margin:12px 0; }
+.stat { height:83px; border-radius:16px; padding:10px; gap:8px; }
+.stat-ico { font-size:25px; }
+.stat strong { font-size:22px; }
+.stat small { font-size:10px; }
+.growth { display:none; }
+.panel { padding:15px; border-radius:18px; }
+.panel-head h2 { font-size:17px; }
+.circle { height:49px; width:49px; font-size:16px; }
+.levels:before { top:28px; }
+.level span { font-size:9px; }
+.current { flex-wrap:wrap; }
+.current .start { width:100%; }
+.quick-grid { grid-template-columns:1fr 1fr; }
+.footer { padding:12px; gap:10px; }
+.quote { font-size:13px; }
+.signature { font-size:16px; }
+.mobile {
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+padding:7px 3px calc(7px + env(safe-area-inset-bottom));
+background:#04142af5;
+border-top:1px solid #1a4c88;
+z-index:10;
+}
+.mobile button {
+border:0;
+background:none;
+color:#9bb7dd;
+font-size:10px;
+display:grid;
+justify-items:center;
+gap:3px;
+}
+.mobile button span { font-size:19px; }
+.mobile button.active { color:#31d8ff; }
+.gamegrid { grid-template-columns:1fr 1fr; }
+.heading h1 { font-size:26px; }
+.toast { left:12px; right:12px; bottom:80px; text-align:center; }
+}
+
+@media(max-width:390px) {
+.gamegrid { grid-template-columns:1fr; }
+.hero h1 { font-size:27px; }
+.goal b { font-size:13px; }
 }
 </style>
 </head>
-<body>
-<div class="app">
-
-<header class="header">
-  <div class="brand">
-    <div class="logo">🔊</div>
-    <div>
-      <h2>RusMaster AI</h2>
-      <p>Учись. Говори. Достигай.</p>
-    </div>
-  </div>
-  <div class="avatar">D</div>
-</header>
-
-<!-- HOME -->
-<section class="page active" id="home">
-  <div class="welcome">
-    <small>Добро пожаловать!</small>
-    <h1>Привет, Диёpбек! 👋</h1>
-  </div>
-
-  <div class="hero">
-    <div class="hero-top">
-      <h3>Твой прогресс</h3>
-      <span class="level">A1 BEGINNER</span>
-    </div>
-    <div class="progress-number">35% <span>завершено</span></div>
-    <div class="progress"><div></div></div>
-    <small class="muted">35 из 100 уроков</small>
-  </div>
-
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-icon">🔥</div>
-      <strong>7 дней</strong>
-      <small class="muted">Учишься подряд</small>
-    </div>
-    <div class="stat">
-      <div class="stat-icon">⭐</div>
-      <strong>248</strong>
-      <small class="muted">Новых слов</small>
-    </div>
-  </div>
-
-  <div class="section-head">
-    <h3>Сегодняшние задания</h3>
-    <span id="task-count">0/4 выполнено</span>
-  </div>
-  <div class="tasks">
-    <div class="task">
-      <button class="check" onclick="complete(this)">✓</button>
-      <div class="task-info">
-        <strong>Выучить 15 новых слов</strong>
-        <small>15 минут</small>
-      </div>
-    </div>
-    <div class="task">
-      <button class="check" onclick="complete(this)">✓</button>
-      <div class="task-info">
-        <strong>Пройти урок грамматики</strong>
-        <small>20 минут</small>
-      </div>
-    </div>
-    <div class="task">
-      <button class="check" onclick="complete(this)">✓</button>
-      <div class="task-info">
-        <strong>Поговорить с AI</strong>
-        <small>15 минут</small>
-      </div>
-    </div>
-    <div class="task">
-      <button class="check" onclick="complete(this)">✓</button>
-      <div class="task-info">
-        <strong>Пройти тест</strong>
-        <small>10 минут</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="ai-card">
-    <div class="ai-label">✦ AI SPEAKING</div>
-    <h2>Поговорим по-русски?</h2>
-    <p>Практикуй разговорный русский с личным AI-преподавателем.</p>
-    <button class="primary" onclick="showPage('speaking')">Начать разговор →</button>
-  </div>
-</section>
-
-<!-- LESSONS -->
-<section class="page" id="lessons">
-  <div class="welcome">
-    <small>ТВОЁ ОБУЧЕНИЕ</small>
-    <h1>Уроки 📚</h1>
-  </div>
-  <div class="hero">
-    <h2>Русский с нуля до B1</h2>
-    <p class="muted" style="margin-top:10px">Полный курс с практикой и упражнениями.</p>
-    <div class="progress"><div></div></div>
-    <small class="muted">Пройдено 35% курса</small>
-  </div>
-  <div class="section-head"><h3>Мои уроки</h3></div>
-  <div class="lesson"><div class="lesson-icon">👋</div><div><h3>Урок 1. Приветствия и знакомство</h3><p>5–10 минут · A1</p></div></div>
-  <div class="lesson"><div class="lesson-icon">📖</div><div><h3>Урок 2. Существительные и род</h3><p>8–12 минут · A1</p></div></div>
-  <div class="lesson"><div class="lesson-icon">✍️</div><div><h3>Урок 3. Глаголы и времена</h3><p>10–15 минут · A1</p></div></div>
-  <div class="lesson"><div class="lesson-icon">🔒</div><div><h3>Урок 4. Прилагательные</h3><p>Скоро откроется</p></div></div>
-</section>
-
-<!-- VOCABULARY -->
-<section class="page" id="vocabulary">
-  <div class="welcome">
-    <small>ТВОЙ ЛИЧНЫЙ СЛОВАРЬ</small>
-    <h1>Словарь 📘</h1>
-  </div>
-  <input class="search" placeholder="🔍 Поиск слов..." oninput="searchWords(this.value)">
-  <div id="word-list">
-    <div class="word"><h3>Привет</h3><p>Salom · Здравствуй!</p></div>
-    <div class="word"><h3>Спасибо</h3><p>Rahmat · Благодарность</p></div>
-    <div class="word"><h3>Любовь</h3><p>Sevgi · Чувство</p></div>
-    <div class="word"><h3>Дружба</h3><p>Do‘stlik · Отношения</p></div>
-    <div class="word"><h3>Достопримечательность</h3><p>Diqqatga sazovor joy</p></div>
-  </div>
-</section>
-
-<!-- GAMES -->
-<section class="page" id="games">
-  <div class="welcome">
-    <small>УЧИСЬ ИГРАЯ</small>
-    <h1>Игры 🎮</h1>
-  </div>
-  <div class="cards">
-    <div class="card"><div class="emoji">⚡</div><h3>Быстрый тест</h3><p>Проверь свои знания за 60 секунд.</p></div>
-    <div class="card"><div class="emoji">🧩</div><h3>Составь слово</h3><p>Найди правильные пары слов.</p></div>
-    <div class="card"><div class="emoji">🏆</div><h3>Викторина</h3><p>Проверь себя и получи баллы.</p></div>
-    <div class="card"><div class="emoji">🃏</div><h3>Карточки</h3><p>Запоминай новые слова.</p></div>
-  </div>
-</section>
-
-<!-- AI SPEAKING -->
-<section class="page" id="speaking">
-  <div class="welcome">
-    <small>ТВОЙ ЛИЧНЫЙ ПРЕПОДАВАТЕЛЬ</small>
-    <h1>AI Speaking 🤖</h1>
-  </div>
-  <div class="chat">
-    <small>AI TEACHER</small>
-    Привет! Давай поговорим по-русски. Я помогу тебе улучшить разговорную речь. Расскажи, как прошёл твой день?
-  </div>
-  <button class="mic" onclick="alert('Голосовой режим подключим на следующем этапе!')">🎙</button>
-  <p class="muted" style="text-align:center">Нажми на микрофон для голосовой практики</p>
-  <input class="search" placeholder="Напиши свой ответ...">
-  <button class="primary" onclick="alert('AI подключим на следующем этапе!')">Отправить ответ →</button>
-</section>
-
-<!-- PROFILE -->
-<section class="page" id="profile">
-  <div class="profile">
-    <div class="profile-avatar">👨🏻</div>
-    <h2>Диёpбек</h2>
-    <p class="muted" style="margin-top:7px">@rusmaster_student</p>
-    <div class="level" style="display:inline-block;margin-top:16px">A1 BEGINNER</div>
-  </div>
-  <div class="lesson"><div class="lesson-icon">📊</div><div><h3>Мой прогресс</h3><p>Статистика обучения</p></div></div>
-  <div class="lesson"><div class="lesson-icon">⭐</div><div><h3>Мои достижения</h3><p>Твои награды и баллы</p></div></div>
-  <div class="lesson"><div class="lesson-icon">⚙️</div><div><h3>Настройки</h3><p>Управление приложением</p></div></div>
-</section>
-
-</div>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <button class="active" onclick="showPage('home',this)"><b>⌂</b>Главная</button>
-    <button onclick="showPage('lessons',this)"><b>▤</b>Уроки</button>
-    <button onclick="showPage('games',this)"><b>♧</b>Игры</button>
-    <button onclick="showPage('vocabulary',this)"><b>▣</b>Словарь</button>
-    <button onclick="showPage('profile',this)"><b>♙</b>Профиль</button>
-  </div>
-</nav>
-
-<script>
-function showPage(id,button) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  if(button) button.classList.add('active');
-  else {
-    const index={home:0,lessons:1,games:2,vocabulary:3,profile:4};
-    document.querySelectorAll('.nav button')[index[id]]?.classList.add('active');
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function complete(button) {
-  button.classList.toggle('done');
-  const count=document.querySelectorAll('.check.done').length;
-  document.getElementById('task-count').textContent=count+'/4 выполнено';
-}
-function searchWords(value) {
-  document.querySelectorAll('#word-list .word').forEach(word=>{
-    word.style.display=word.textContent.toLowerCase().includes(value.toLowerCase())?'block':'none';
-  });
-}
-</script>
-</body>
-</html>
