@@ -607,3 +607,277 @@ gap:3px;
 }
 </style>
 </head>
+<body>
+<div class="app">
+
+<aside class="sidebar">
+<div class="brand">
+<div class="logo">🇷🇺<br>📖</div>
+<h2>RusMaster <span>AI</span></h2>
+<small>Learn. Speak. Master.</small>
+</div>
+
+<nav class="nav">
+<button class="active" data-page="home"><span class="ic">⌂</span>Bosh sahifa</button>
+<button data-page="lessons"><span class="ic">🎓</span>Darslar</button>
+<button data-page="vocab"><span class="ic">📖</span>Lug‘at</button>
+<button data-page="games"><span class="ic">🎮</span>O‘yinlar</button>
+<button data-page="speaking"><span class="ic">🎙</span>AI Speaking</button>
+<button data-page="stats"><span class="ic">▥</span>Statistika</button>
+<button data-page="profile"><span class="ic">◉</span>Profil</button>
+<button data-page="settings"><span class="ic">⚙</span>Sozlamalar</button>
+</nav>
+
+<div class="premium">
+<b>♛ &nbsp; Premium</b>
+<p>To‘liq imkoniyatlar uchun yangilang.</p>
+<button onclick="toast('Premium imkoniyatlari keyingi bosqichda ulanadi')">Yangilash ✦</button>
+</div>
+
+<div class="version">v1.0.0</div>
+</aside>
+
+<main class="main">
+
+<header class="top">
+<div class="date">
+▦ &nbsp; <span id="today">Bugun</span>
+<small>Dushanba</small>
+</div>
+<div class="right">
+<button class="bell" onclick="toast('Yangi bildirishnomalar yo‘q')">♧</button>
+<div class="user">
+<div class="avatar">D</div>Diyorbek⌄
+</div>
+</div>
+</header>
+
+<section class="section active" id="page-home">
+
+<div class="hero-row">
+
+<div class="hero">
+<div class="hero-copy">
+<div class="eyebrow">Rus tilini o‘rganish platformasi</div>
+<h1>Salom, Diyorbek! 👋</h1>
+<p class="hero-sub">Bugun ham rus tilida<br>bir qadam oldinga!</p>
+<div class="goal">
+<span class="target">🎯</span>
+<div>
+<small>Kunlik maqsad:</small>
+<b>15 ta yangi so‘z</b>
+</div>
+<b>›</b>
+</div>
+</div>
+</div>
+
+<div class="progress">
+<div class="progress-title">Umumiy progress</div>
+<div class="ring"><b>35%</b></div>
+<small>35 / 100 dars</small>
+</div>
+
+</div>
+
+<div class="stats">
+<div class="stat"><span class="stat-ico">📘</span><div><strong>7</strong><small>Kun davomida</small></div><span class="growth">↑ +1</span></div>
+<div class="stat"><span class="stat-ico">⭐</span><div><strong>248</strong><small>Yangi so‘zlar</small></div><span class="growth">↑ +12</span></div>
+<div class="stat"><span class="stat-ico">🏆</span><div><strong>2</strong><small>Muvaffaqiyatlar</small></div></div>
+<div class="stat"><span class="stat-ico">🔥</span><div><strong>7</strong><small>Kunlik seriya</small></div></div>
+</div>
+
+<div class="lower">
+
+<div class="panel">
+<div class="panel-head">
+<h2>🎓 O‘quv yo‘lingiz</h2>
+<button class="link" onclick="go('lessons')">Davom ettirish →</button>
+</div>
+
+<div class="levels">
+<div class="level active"><div class="circle">A1</div><span>Boshlangan</span></div>
+<div class="level"><div class="circle">A2</div><span class="lock">🔒</span></div>
+<div class="level"><div class="circle">B1</div><span class="lock">🔒</span></div>
+<div class="level"><div class="circle">B2</div><span class="lock">🔒</span></div>
+<div class="level"><div class="circle">C1</div><span class="lock">🔒</span></div>
+</div>
+
+<div class="current">
+<span class="book">📘</span>
+<div class="current-info">
+<small>Joriy dars:</small>
+<b>Rus alifbosi va talaffuz</b>
+</div>
+<button class="start" onclick="go('lessons')">▶ &nbsp; Darsni boshlash</button>
+</div>
+</div>
+
+<div class="panel">
+<div class="panel-head"><h2>⚡ Tezkor amallar</h2></div>
+<div class="quick-grid">
+<button class="quick" onclick="go('vocab')"><span class="qicon">📖</span><b>Lug‘at</b><small>(10 000+ so‘z)</small></button>
+<button class="quick" onclick="go('games')"><span class="qicon">🎮</span><b>O‘yinlar</b><small>(Bilimingizni sinab ko‘ring)</small></button>
+<button class="quick" onclick="go('speaking')"><span class="qicon">🎙️</span><b>AI Speaking</b><small>(Ruscha suhbat)</small></button>
+<button class="quick" onclick="go('stats')"><span class="qicon">▥</span><b>Statistika</b><small>(Natijalaringiz)</small></button>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+<div class="quote">⭐ &nbsp; “Rus tili — yangi imkoniyatlar kaliti!”</div>
+<div class="signature">RusMaster AI 🚀</div>
+</div>
+
+</section>
+
+<section class="section" id="page-lessons">
+<div class="heading">
+<h1>Darslar</h1>
+<p>Rus tilini A1 dan C1 gacha bosqichma-bosqich o‘rganing.</p>
+</div>
+<div class="panel">
+<div class="panel-head"><h2>O‘quv yo‘lingiz</h2></div>
+<div class="levels">
+<div class="level active"><div class="circle">A1</div><span>Boshlang‘ich</span></div>
+<div class="level"><div class="circle">A2</div><span>Elementar</span></div>
+<div class="level"><div class="circle">B1</div><span>O‘rta</span></div>
+<div class="level"><div class="circle">B2</div><span>Yuqori</span></div>
+<div class="level"><div class="circle">C1</div><span>Ilg‘or</span></div>
+</div>
+</div>
+
+<div class="list" style="margin-top:14px">
+<div class="rowitem"><span class="symbol">🔤</span><div><b>1. Rus alifbosi va talaffuz</b><small>Harflar, tovushlar va urg‘u · 15 daqiqa</small></div></div>
+<div class="rowitem"><span class="symbol">👋</span><div><b>2. Salomlashish va tanishish</b><small>Привет, здравствуйте, меня зовут… · 20 daqiqa</small></div></div>
+<div class="rowitem"><span class="symbol">👤</span><div><b>3. Kishilik olmoshlari</b><small>Я, ты, он, она, мы, вы, они · 20 daqiqa</small></div></div>
+</div>
+</section>
+
+<section class="section" id="page-vocab">
+<div class="heading">
+<h1>Lug‘at</h1>
+<p>Ruscha so‘zlarni qidiring va talaffuzini tinglang.</p>
+</div>
+
+<input class="search" id="search" placeholder="So‘z qidirish...">
+
+<div class="list" id="words">
+<div class="rowitem" data-word="привет salom"><span class="symbol">🇷🇺</span><div><b>Привет</b><small>Salom</small></div><button onclick="say('Привет')">🔊</button></div>
+<div class="rowitem" data-word="спасибо rahmat"><span class="symbol">🇷🇺</span><div><b>Спасибо</b><small>Rahmat</small></div><button onclick="say('Спасибо')">🔊</button></div>
+<div class="rowitem" data-word="пожалуйста iltimos marhamat"><span class="symbol">🇷🇺</span><div><b>Пожалуйста</b><small>Iltimos / Marhamat</small></div><button onclick="say('Пожалуйста')">🔊</button></div>
+<div class="rowitem" data-word="книга kitob"><span class="symbol">🇷🇺</span><div><b>Книга</b><small>Kitob</small></div><button onclick="say('Книга')">🔊</button></div>
+</div>
+</section>
+
+<section class="section" id="page-games">
+<div class="heading">
+<h1>O‘yinlar</h1>
+<p>Bilimingizni qiziqarli mashqlar bilan mustahkamlang.</p>
+</div>
+
+<div class="gamegrid">
+<div class="game"><span class="symbol">🧩</span><h3>So‘z juftligi</h3><p>So‘zlarni tarjimasi bilan moslang.</p><button onclick="toast('O‘yin keyingi bosqichda ulanadi')">O‘ynash →</button></div>
+<div class="game"><span class="symbol">⚡</span><h3>Tezkor test</h3><p>Vaqtga qarshi bilimingizni sinang.</p><button onclick="toast('Test keyingi bosqichda ulanadi')">Boshlash →</button></div>
+<div class="game"><span class="symbol">🧠</span><h3>Xotira kartalari</h3><p>Yangi so‘zlarni eslab qoling.</p><button onclick="toast('Kartalar keyingi bosqichda ulanadi')">O‘ynash →</button></div>
+</div>
+</section>
+
+<section class="section" id="page-speaking">
+<div class="heading">
+<h1>AI Speaking</h1>
+<p>Rus tilida gapirish mashqlari.</p>
+</div>
+<div class="panel" style="text-align:center;padding:55px 20px">
+<div style="font-size:64px">🎙️</div>
+<h2>Rus tilida suhbatga tayyormisiz?</h2>
+<p style="color:var(--muted)">AI suhbat funksiyasini keyingi bosqichda xavfsiz server orqali ulaymiz.</p>
+<button class="start" onclick="toast('AI suhbat keyingi bosqichda ulanadi')">Suhbatni boshlash</button>
+</div>
+</section>
+
+<section class="section" id="page-stats">
+<div class="heading"><h1>Statistika</h1><p>O‘rganish natijalaringiz.</p></div>
+<div class="stats">
+<div class="stat"><span class="stat-ico">📘</span><div><strong>7</strong><small>Kun davomida</small></div></div>
+<div class="stat"><span class="stat-ico">⭐</span><div><strong>248</strong><small>Yangi so‘zlar</small></div></div>
+<div class="stat"><span class="stat-ico">🏆</span><div><strong>2</strong><small>Yutuqlar</small></div></div>
+<div class="stat"><span class="stat-ico">🔥</span><div><strong>7</strong><small>Kunlik seriya</small></div></div>
+</div>
+</section>
+
+<section class="section" id="page-profile">
+<div class="heading"><h1>Profil</h1><p>Shaxsiy hisobingiz.</p></div>
+<div class="rowitem"><div class="avatar">D</div><div><b>Diyorbek</b><small>RusMaster AI o‘quvchisi · A1</small></div></div>
+</section>
+
+<section class="section" id="page-settings">
+<div class="heading"><h1>Sozlamalar</h1><p>Ilova sozlamalari.</p></div>
+<div class="rowitem">🌐 &nbsp; Ilova tili — O‘zbekcha</div>
+</section>
+
+</main>
+</div>
+
+<nav class="mobile">
+<button class="active" data-page="home"><span>⌂</span>Bosh sahifa</button>
+<button data-page="lessons"><span>🎓</span>Darslar</button>
+<button data-page="vocab"><span>📖</span>Lug‘at</button>
+<button data-page="games"><span>🎮</span>O‘yinlar</button>
+<button data-page="profile"><span>◉</span>Profil</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+<script>
+function go(p) {
+document.querySelectorAll('.section').forEach(x => x.classList.remove('active'));
+document.getElementById('page-' + p)?.classList.add('active');
+
+document.querySelectorAll('[data-page]').forEach(x => {
+x.classList.toggle('active', x.dataset.page === p);
+});
+
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.querySelectorAll('[data-page]').forEach(x => {
+x.addEventListener('click', () => go(x.dataset.page));
+});
+
+function toast(s) {
+let x = document.getElementById('toast');
+x.textContent = s;
+x.classList.add('show');
+clearTimeout(window.tt);
+window.tt = setTimeout(() => x.classList.remove('show'), 2400);
+}
+
+function say(s) {
+if (!window.speechSynthesis) {
+toast('Talaffuz funksiyasi qo‘llab-quvvatlanmaydi');
+return;
+}
+
+let u = new SpeechSynthesisUtterance(s);
+u.lang = 'ru-RU';
+speechSynthesis.speak(u);
+}
+
+document.getElementById('search').addEventListener('input', e => {
+let q = e.target.value.toLowerCase();
+
+document.querySelectorAll('#words .rowitem').forEach(x => {
+x.style.display = x.dataset.word.includes(q) ? 'flex' : 'none';
+});
+});
+
+document.getElementById('today').textContent =
+new Date().toLocaleDateString('uz-UZ',{
+day:'numeric',
+month:'long',
+year:'numeric'
+});
+</script>
+</body>
+</html>
