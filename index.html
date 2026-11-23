@@ -1468,9 +1468,11 @@ function showContent(id, title) {
 
 
     root.querySelectorAll('.level-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentLevel = btn.dataset.
-    });
+  btn.addEventListener('click', () => {
+    currentLevel = btn.dataset.level;
+    showModules();
+  });
+});
 
     $('rm-back-modules').addEventListener('click', showModules);
     $('rm-back-lessons').addEventListener('click', () => showLessons(currentModule));
@@ -1488,9 +1490,7 @@ function showContent(id, title) {
 <p>Ruscha so‘zlarni qidiring va talaffuzini tinglang.</p>
 </div>
 
-<input classlevel;
-        showModules();
-      });="search" id="search" placeholder="So‘z qidirish...">
+<input type="search" id="search" placeholder="So‘z qidirish...">
 
 <div class="list" id="words">
 <div class="rowitem" data-word="привет salom"><span class="symbol">🇷🇺</span><div><b>Привет</b><small>Salom</small></div><button onclick="say('Привет')">🔊</button></div>
