@@ -1186,6 +1186,31 @@ gap:3px;
       }
     };
 
+const questionBank = {
+  'A1-0-0': [
+    { q: 'Rus alifbosida nechta harf bor?', a: ['31 ta', '32 ta', '33 ta', '35 ta'], c: 2, e: 'Rus alifbosi 33 ta harfdan iborat.' },
+    { q: 'Rus tilidagi birinchi harf qaysi?', a: ['Б', 'А', 'В', 'Г'], c: 1, e: 'А — rus alifbosining birinchi harfi.' },
+    { q: 'Rus tilidagi oxirgi harf qaysi?', a: ['Э', 'Ю', 'Я', 'Ь'], c: 2, e: 'Я — alifboning oxirgi harfi.' },
+    { q: 'Qaysi harf unli?', a: ['Б', 'М', 'А', 'Т'], c: 2, e: 'А — unli tovushni ifodalaydi.' },
+    { q: 'Qaysi harf undosh?', a: ['О', 'У', 'И', 'К'], c: 3, e: 'К — undosh tovush.' },
+    { q: 'Rus tilida nechta unli harf bor?', a: ['5 ta', '6 ta', '10 ta', '12 ta'], c: 2, e: 'Rus tilida 10 ta unli harf mavjud.' },
+    { q: 'Qaysi qatorda faqat unli harflar berilgan?', a: ['А, О, У', 'Б, В, Г', 'М, Н, О', 'Д, Е, Ж'], c: 0, e: 'А, О, У — unli harflar.' },
+    { q: 'Ь belgisi qanday vazifa bajaradi?', a: ['Unli tovush', 'Yumshatish belgisi', 'Urg‘u belgisi', 'Alohida undosh'], c: 1, e: 'Ь oldingi undoshning yumshoqligini bildiradi.' },
+    { q: 'Ъ belgisi nima deb ataladi?', a: ['Yumshatish', 'Qattiqlik belgisi', 'Unli', 'Urg‘u'], c: 1, e: 'Ъ — qattiqlik yoki ajratish belgisi.' },
+    { q: 'Ё harfi odatda qanday talaffuz qilinadi?', a: ['Yo', 'Ya', 'Ye', 'Yu'], c: 0, e: 'Ё odatda yo tovush birikmasini ifodalaydi.' },
+    { q: 'Ж harfining talaffuziga yaqin tovush qaysi?', a: ['J', 'S', 'K', 'T'], c: 0, e: 'Ж o‘zbek tilidagi j tovushiga yaqin.' },
+    { q: 'Ш harfi qanday tovushni bildiradi?', a: ['Sh', 'Ch', 'Ts', 'Z'], c: 0, e: 'Ш — sh tovushi.' },
+    { q: 'Ч harfi qanday o‘qiladi?', a: ['Sh', 'Ch', 'J', 'S'], c: 1, e: 'Ч — ch tovushi.' },
+    { q: 'Ц harfi qaysi tovushni ifodalaydi?', a: ['Ts', 'Ch', 'Sh', 'Yo'], c: 0, e: 'Ц — ts tovushi.' },
+    { q: 'Х harfi qanday talaffuz qilinadi?', a: ['H', 'X', 'Sh', 'Ch'], c: 1, e: 'Х — x tovushiga yaqin.' },
+    { q: 'Qaysi so‘z «мама» deb yoziladi?', a: ['Ota', 'Ona', 'Aka', 'Singil'], c: 1, e: 'Мама — ona.' },
+    { q: '«Дом» so‘zining tarjimasi nima?', a: ['Kitob', 'Uy', 'Maktab', 'Suv'], c: 1, e: 'Дом — uy.' },
+    { q: '«Книга» so‘zining tarjimasi nima?', a: ['Daftar', 'Qalam', 'Kitob', 'Stol'], c: 2, e: 'Книга — kitob.' },
+    { q: 'Rus tilida urg‘u nimani bildiradi?', a: ['So‘zdagi kuchli talaffuz qilinadigan bo‘g‘inni', 'Gap oxirini', 'Harflar sonini', 'So‘zning jinsini'], c: 0, e: 'Urg‘u so‘zdagi bir bo‘g‘inning ajratib talaffuz qilinishidir.' },
+    { q: '«Спасибо» so‘zining tarjimasi nima?', a: ['Salom', 'Xayr', 'Rahmat', 'Iltimos'], c: 2, e: 'Спасибо — rahmat.' }
+  ]
+};
+
     const $ = id => root.querySelector('#' + id);
     const storageKey = 'rmAcademyCompletedV1';
     let completed = [];
@@ -1236,7 +1261,6 @@ gap:3px;
         card.className = 'module-card';
         card.innerHTML = `
           <h3>${i+1}. ${module[0]}</h3>
-          <p>${module[1]}</p>
           <div class="module-meta">
             <span>${module[2].length} ta dars</span>
             <span>${done}/${module[2].length} bajarilgan</span>
@@ -1249,90 +1273,203 @@ gap:3px;
       updateProgress();
     }
 
-    function showLessons(moduleIndex) {
-      currentModule = moduleIndex;
-      const module = courses[currentLevel].modules[moduleIndex];
-      $('rm-module-view').hidden = true;
-      $('rm-lesson-view').hidden = false;
-      $('rm-content-view').hidden = true;
-      $('rm-module-title').textContent = module[0];
-      $('rm-lesson-list').innerHTML = '';
+    
+function showLessons(moduleIndex) {
+  currentModule = moduleIndex;
+  const module = courses[currentLevel].modules[moduleIndex];
 
-      module[2].forEach((title, i) => {
-        const id = currentLevel + '-' + moduleIndex + '-' + i;
-        const btn = document.createElement('button');
-        btn.className = 'lesson-item';
-        btn.innerHTML = `
-          <span class="lesson-number">${completed.includes(id) ? '✓' : i+1}</span>
-          <span><b>${title}</b><small>${completed.includes(id) ? 'Tugallangan' : 'Darsni boshlash'} · 20–30 daqiqa</small></span>
-        `;
-        btn.addEventListener('click', () => showContent(id, title));
-        $('rm-lesson-list').appendChild(btn);
-      });
+  $('rm-module-view').hidden = true;
+  $('rm-lesson-view').hidden = false;
+  $('rm-content-view').hidden = true;
+  $('rm-module-title').textContent = module[0];
+  $('rm-lesson-list').innerHTML = '';
+
+  const allLessons = getLessons(currentLevel);
+
+  module[2].forEach((title, i) => {
+    const id = currentLevel + '-' + moduleIndex + '-' + i;
+    const lessonIndex = allLessons.findIndex(x => x.id === id);
+    const previousLesson = allLessons[lessonIndex - 1];
+
+    const unlocked = lessonIndex === 0 ||
+      (previousLesson && completed.includes(previousLesson.id));
+
+    const isCompleted = completed.includes(id);
+
+    const btn = document.createElement('button');
+    btn.className = 'lesson-item';
+    btn.disabled = !unlocked;
+
+    btn.innerHTML = `
+      <span class="lesson-number">
+        ${isCompleted ? '✓' : unlocked ? i + 1 : '🔒'}
+      </span>
+      <span>
+        <b>${title}</b>
+        <small>
+          ${isCompleted ? 'Tugallangan' :
+            unlocked ? 'Darsni boshlash' : 'Avval oldingi darsni yakunlang'}
+          · 20–30 daqiqa
+        </small>
+      </span>
+    `;
+
+    if (unlocked) {
+      btn.addEventListener('click', () => showContent(id, title));
     }
 
-    function showContent(id, title) {
-      $('rm-module-view').hidden = true;
-      $('rm-lesson-view').hidden = true;
-      $('rm-content-view').hidden = false;
+    $('rm-lesson-list').appendChild(btn);
+  });
+}
 
-      const videoTitle = encodeURIComponent('Russian language ' + title);
-      $('rm-content').innerHTML = `
-        <div style="color:#65d9f0;font-size:12px;font-weight:bold">
-          ${currentLevel} · ${courses[currentLevel].modules[currentModule][0]}
-        </div>
-        <h2>${title}</h2>
-        <div class="lesson-video">
-          <div><span>▶</span><b>Videodars</b><p>Bu mavzu uchun video material tayyorlanmoqda.</p></div>
-        </div>
-        <h3>1. Dars maqsadi</h3>
-        <p>Ushbu darsda «${title}» mavzusining asosiy qoidalari, qo‘llanish holatlari va rus tilidagi misollar bilan tanishasiz.</p>
-        <h3>2. Nazariy qism</h3>
-        <p>Yangi mavzuni o‘rganishda rus tilidagi grammatik qoidalarga, so‘zlarning shakliga va gapdagi vazifasiga e'tibor bering. Har bir qoidani misollar orqali mustahkamlang.</p>
-        <h3>3. Misollar</h3>
-        <p><b>Здравствуйте!</b> — Assalomu alaykum!</p>
-        <p><b>Меня зовут Анна.</b> — Mening ismim Anna.</p>
-        <p><b>Я изучаю русский язык.</b> — Men rus tilini o‘rganyapman.</p>
-        <h3>4. Mustahkamlash</h3>
-        <p>Yangi qoidalarni ovoz chiqarib takrorlang, misollarni yozing va ularni o‘zbek tiliga tarjima qiling.</p>
-        <div class="lesson-quiz">
-          <h3>5. Nazorat savoli</h3>
-          <p>«Здравствуйте» so‘zining tarjimasi qaysi?</p>
-          <label><input type="radio" name="rmquiz" value="0"> Xayr</label>
-          <label><input type="radio" name="rmquiz" value="1"> Assalomu alaykum</label>
-          <label><input type="radio" name="rmquiz" value="2"> Rahmat</label>
-          <button class="lesson-action" id="rm-check-answer">Javobni tekshirish</button>
-          <p id="rm-quiz-result"></p>
-        </div>
-        <button class="lesson-action" id="rm-complete-lesson">
-          ${completed.includes(id) ? '✓ Dars tugallangan' : 'Darsni tugatish'}
-        </button>
-      `;
+   
+function showContent(id, title) {
+  $('rm-module-view').hidden = true;
+  $('rm-lesson-view').hidden = true;
+  $('rm-content-view').hidden = false;
 
-      $('rm-check-answer').addEventListener('click', () => {
-        const answer = root.querySelector('input[name="rmquiz"]:checked');
-        $('rm-quiz-result').textContent = !answer
-          ? 'Avval javobni tanlang.'
-          : answer.value === '1'
-            ? 'To‘g‘ri javob! Barakalla.'
-            : 'Javob noto‘g‘ri. Yana urinib ko‘ring.';
-      });
+  const questions = questionBank[id];
 
-      $('rm-complete-lesson').addEventListener('click', () => {
-        if (!completed.includes(id)) {
-          completed.push(id);
-          localStorage.setItem(storageKey, JSON.stringify(completed));
-        }
-        updateProgress();
-        showLessons(currentModule);
-      });
+  if (!questions || questions.length !== 20) {
+    $('rm-content').innerHTML = `
+      <h2>${title}</h2>
+      <p>Bu dars uchun test savollari tayyorlanmoqda.</p>
+      <p>Test bazasi tayyor bo‘lmaguncha darsni yakunlab bo‘lmaydi.</p>
+      <button class="lesson-action" id="rm-return-lessons">
+        Darslarga qaytish
+      </button>
+    `;
+    $('rm-return-lessons').addEventListener('click', () => {
+      showLessons(currentModule);
+    });
+    return;
+  }
+
+  $('rm-content').innerHTML = `
+    <div style="color:#65d9f0;font-size:12px;font-weight:bold">
+      ${currentLevel} · ${courses[currentLevel].modules[currentModule][0]}
+    </div>
+
+    <h2>${title}</h2>
+
+    <div class="lesson-video">
+      <div>
+        <span>▶</span>
+        <b>Videodars</b>
+        <p>Bu mavzu uchun video material tayyorlanmoqda.</p>
+      </div>
+    </div>
+
+    <h3>Yakuniy nazorat testi</h3>
+    <p>20 ta savol. O‘tish uchun kamida 17 ta to‘g‘ri javob kerak.</p>
+
+    <div id="rm-question-list"></div>
+
+    <button class="lesson-action" id="rm-submit-test">
+      Testni yakunlash
+    </button>
+
+    <div id="rm-test-result"></div>
+
+    <button class="lesson-action" id="rm-retry-test" hidden>
+      Qayta topshirish
+    </button>
+
+    <button class="lesson-action" id="rm-next-lesson" hidden>
+      Darslar ro‘yxatiga qaytish
+    </button>
+  `;
+
+  $('rm-question-list').innerHTML = questions.map((q, i) => `
+    <div class="lesson-quiz" style="margin-bottom:15px">
+      <h4>${i + 1}. ${q.q}</h4>
+      ${q.a.map((answer, j) => `
+        <label style="display:block;margin:9px 0">
+          <input type="radio" name="rmquiz-${i}" value="${j}">
+          ${answer}
+        </label>
+      `).join('')}
+      <p id="rm-explanation-${i}"></p>
+    </div>
+  `).join('');
+
+  $('rm-submit-test').addEventListener('click', () => {
+    const answers = questions.map((q, i) =>
+      root.querySelector(`input[name="rmquiz-${i}"]:checked`)
+    );
+
+    const unanswered = answers.filter(a => !a).length;
+
+    if (unanswered > 0) {
+      $('rm-test-result').textContent =
+        `${unanswered} ta savol javobsiz qoldi. Barchasiga javob bering.`;
+      return;
     }
+
+    let correct = 0;
+
+    questions.forEach((q, i) => {
+      const selected = Number(answers[i].value);
+      const explanation = $('rm-explanation-' + i);
+
+      if (selected === q.c) {
+        correct++;
+        explanation.textContent = '✓ To‘g‘ri!';
+        explanation.style.color = '#16a34a';
+      } else {
+        explanation.textContent =
+          '✗ To‘g‘ri javob: ' + q.a[q.c] + '. ' + q.e;
+        explanation.style.color = '#ef4444';
+      }
+    });
+
+    const percent = Math.round(correct / 20 * 100);
+
+    $('rm-test-result').innerHTML = `
+      <h3>Natijangiz: ${correct}/20 (${percent}%)</h3>
+      <p>${correct >= 17
+        ? 'Tabriklaymiz! Siz testdan muvaffaqiyatli o‘tdingiz!'
+        : 'Hozircha yetarli natija emas. Xatolarni o‘rganib, qayta urinib ko‘ring.'}
+      </p>
+    `;
+
+    $('rm-submit-test').disabled = true;
+
+    if (correct >= 17) {
+      if (!completed.includes(id)) {
+        completed.push(id);
+        localStorage.setItem(storageKey, JSON.stringify(completed));
+      }
+
+      updateProgress();
+      $('rm-next-lesson').hidden = false;
+    } else {
+      $('rm-retry-test').hidden = false;
+    }
+  });
+
+  $('rm-retry-test').addEventListener('click', () => {
+    questions.forEach((q, i) => {
+      root.querySelectorAll(`input[name="rmquiz-${i}"]`).forEach(input => {
+        input.checked = false;
+      });
+      $('rm-explanation-' + i).textContent = '';
+    });
+
+    $('rm-test-result').textContent = '';
+    $('rm-retry-test').hidden = true;
+    $('rm-submit-test').disabled = false;
+  });
+
+  $('rm-next-lesson').addEventListener('click', () => {
+    showLessons(currentModule);
+  });
+}
+
 
     root.querySelectorAll('.level-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        currentLevel = btn.dataset.level;
-        showModules();
-      });
+        currentLevel = btn.dataset.
     });
 
     $('rm-back-modules').addEventListener('click', showModules);
@@ -1351,7 +1488,9 @@ gap:3px;
 <p>Ruscha so‘zlarni qidiring va talaffuzini tinglang.</p>
 </div>
 
-<input class="search" id="search" placeholder="So‘z qidirish...">
+<input classlevel;
+        showModules();
+      });="search" id="search" placeholder="So‘z qidirish...">
 
 <div class="list" id="words">
 <div class="rowitem" data-word="привет salom"><span class="symbol">🇷🇺</span><div><b>Привет</b><small>Salom</small></div><button onclick="say('Привет')">🔊</button></div>
